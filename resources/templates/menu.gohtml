@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+    <script src="/public/js/dashboard.js"></script>
+       <link rel="stylesheet" href="/public/css/manage-item.css">
+<script>console.log({{.MenuItems}})</script>
+    <section class="home-section">
+        <div class="text">{{.PageName}}</div>
+    </section>
+    	<div class="card">
+		<div>
+
+			{{range $menuNum, $menuBody := .MenuItems}}
+                <div id = {{$menuBody.ID}}>
+                    <img src = {{$menuBody.ImageSource}}/>
+                    <div>{{$menuBody.ItemName}}</div>
+                    <div>{{$menuBody.ItemDescription}}</div>
+                    <div>{{$menuBody.ItemIngredients}}</div>
+                    <div>{{$menuBody.ItemPrice}}</div>
+                </div>
+			{{end}}
+
+		</div>
+	</div>
+</html>

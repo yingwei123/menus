@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+    <script src="/public/js/manage-item.js"></script>
+    <link rel="stylesheet" href="/public/css/manage-item.css">
+<script>console.log({{.MenuItems}})</script>
+    <section class="home-section">
+        <div class="text">{{.PageName}}</div>
+        <a href ="/dashboard">Back</a>
+    </section>
+    	<div class="head">
+			{{range $menuNum, $menuBody := .MenuItems}}
+                
+                <div id = {{$menuBody.ID}} class ="card" onclick="clickedItem({{$menuBody.ID}})">
+                    <img src = {{$menuBody.ImageSource}}/>
+                    <div id = "name{{$menuBody.ID}}">{{$menuBody.ItemName}}</div>
+                    <div id = "description{{$menuBody.ID}}">{{$menuBody.ItemDescription}}</div>
+                    <div id = "ingredients{{$menuBody.ID}}">{{$menuBody.ItemIngredients}}</div>
+                    <div id = "price{{$menuBody.ID}}">{{$menuBody.ItemPrice}}</div>
+                </div>
+                <br/>
+			{{end}}
+	</div>
+</html>

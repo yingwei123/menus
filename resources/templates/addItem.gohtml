@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+    <script src="/public/js/add-item.js"></script>
+
+    <section class="home-section">
+        <div class="text">{{.PageName}}</div>
+    </section>
+    <a href = "/dashboard">Back </a>
+    <div> Preview (Add Item Image please): </div>
+    <img width="400" height="400" id = "img">
+    <br>
+    <body>
+        <label> Add a screenshot of the item</label>
+        <input type = "file" id = "image-upload-input"  onchange="document.getElementById('img').src = window.URL.createObjectURL(this.files[0])" required>
+        <br/>
+        <label>Item Name : </label><input id="iname"/>
+        <br/>
+        <label>Item Description : </label><input id="idescription"/>
+        <br/>
+        <label>Item Ingredients : </label><input id="ingredients"/>
+        <br/>
+        <label>Item Price : </label><input id="iprice"/>
+        <br/>
+        <button onclick = "addItem()"> Add Item :D</button>
+        
+    </body>
+</html>

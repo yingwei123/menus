@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+    <script src="/public/js/manage-item.js"></script>
+    <link rel="stylesheet" href="/public/css/manage-item.css">
+
+    <section class="home-section">
+        <div class="text">{{.PageName}}</div>
+        <a href ="/dashboard/edit-menu-item">Back</a>
+    </section>
+    	<div class="head">
+            <div id = edit{{.ID}} class ="card">
+                    <img src = {{.ImageSource}}/>
+                    <div id = "name{{.ID}}">{{.ItemName}}</div>
+                    <div id = "description{{.ID}}">{{.ItemDescription}}</div>
+                    <div id = "ingredients{{.ID}}">{{.ItemIngredients}}</div>
+                    <div id = "price{{.ID}}">{{.ItemPrice}}</div>
+            </div>
+	    </div>
+</html>
