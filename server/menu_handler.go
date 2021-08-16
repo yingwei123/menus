@@ -1,14 +1,19 @@
 package server
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
+	"image"
 	"image/jpeg"
 	"image/png"
+	"io"
 	"mime/multipart"
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/nfnt/resize"
 )
 
 type MenuItem struct {
@@ -70,15 +75,21 @@ func (rt Router) AddMenuItem() http.HandlerFunc {
 }
 
 func (rt Router) MenuAdd(fileName string, itemPrice string, itemName string, itemDescription string, imageSource string, itemIngredients string, file multipart.File) (string, error) {
-	println(fileName)
 	if strings.Contains(fileName, ".jpg") || strings.Contains(fileName, ".jpeg") {
-		image, err := jpeg.Decode(file)
+		buf := bytes.NewBuffer(nil)
+		if _, err := io.Copy(buf, file); err != nil {
+			return "", err
+		}
+
+		image, _, err := image.Decode(bytes.NewReader(buf.Bytes()))
+		newImage := resize.Resize(300, 300, image, resize.Lanczos3)
+
 		f, err := os.Create("resources/public/uploads/" + itemName + ".jpeg")
 		if err != nil {
 			return "", err
 		}
 		defer f.Close()
-		err = png.Encode(f, image)
+		err = jpeg.Encode(f, newImage, nil)
 		if err != nil {
 
 			return "", err
@@ -95,13 +106,20 @@ func (rt Router) MenuAdd(fileName string, itemPrice string, itemName string, ite
 	}
 
 	if strings.Contains(fileName, ".png") {
-		image, err := png.Decode(file)
+		buf := bytes.NewBuffer(nil)
+		if _, err := io.Copy(buf, file); err != nil {
+			return "", err
+		}
+
+		image, _, err := image.Decode(bytes.NewReader(buf.Bytes()))
+		newImage := resize.Resize(300, 300, image, resize.Lanczos3)
+
 		f, err := os.Create("resources/public/uploads/" + itemName + ".png")
 		if err != nil {
 			return "", err
 		}
 		defer f.Close()
-		err = png.Encode(f, image)
+		err = png.Encode(f, newImage)
 		if err != nil {
 
 			return "", err

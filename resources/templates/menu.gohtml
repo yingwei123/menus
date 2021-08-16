@@ -7,19 +7,17 @@
     <section class="home-section">
         <div class="text">{{.PageName}}</div>
     </section>
-    	<div class="card">
-		<div>
-
+		<div class="head">
 			{{range $menuNum, $menuBody := .MenuItems}}
-                <div id = {{$menuBody.ID}}>
+                
+                <div id = {{$menuBody.ID}} class ="card">
                     <img src = {{$menuBody.ImageSource}}/>
-                    <div>{{$menuBody.ItemName}}</div>
-                    <div>{{$menuBody.ItemDescription}}</div>
-                    <div>{{$menuBody.ItemIngredients}}</div>
-                    <div>{{$menuBody.ItemPrice}}</div>
+                    <div id = "name{{$menuBody.ID}}">{{$menuBody.ItemName}}</div>
+                    <div id = "description{{$menuBody.ID}}">{{$menuBody.ItemDescription}}</div>
+                    <div id = "ingredients{{$menuBody.ID}}">{{$menuBody.ItemIngredients}}</div>
+                    <div id = "price{{$menuBody.ID}}">{{$menuBody.ItemPrice}}</div>
                 </div>
+                <br/>
 			{{end}}
-
-		</div>
 	</div>
 </html>
